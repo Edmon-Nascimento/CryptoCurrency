@@ -1,54 +1,66 @@
-import styles from  './home.module.css'
-import { BsSearch } from 'react-icons/bs'
+import styles from './home.module.css'
+import { BsSearch } from  'react-icons/bs'
 import { Link } from 'react-router-dom'
 
-export function Home(){
-    return(
-        <main className={styles.container}> 
-            <form action="" className={styles.form}>
-                <input type="text" placeholder='Digite o nome da moeda... Ex: Bitcoin' />
-                <button type="submit"><BsSearch size={30} color='#FFF'/></button>
-            </form>
+export function Home() {
 
-            <table>
-                <thead>
-                    <tr>
-                        <th scope='col'>Moeda</th>
-                        <th scope='col'>Valor Mercado</th>
-                        <th scope='col'>Preço</th>
-                        <th scope='col'>Volume</th>
-                        <th scope='col'>Variação 24h</th>
-                    </tr>
+  return (
+    <main className={styles.container}>
+      <form className={styles.form}>
+        <input 
+          type="text"
+          placeholder="Digite o nome da moeda... EX bitcoin"
+        />
+        <button type="submit">
+          <BsSearch size={30} color="#FFF" />
+        </button>
+      </form>
 
-                    <tbody id='tbody'>
-                        <tr className={styles.tr}>
-                            <td className={styles.tdLabel} data-label="Moeda">
-                                <div className={styles.nome}>
-                                    <Link to={"/detail/bitcoin"}>
-                                        <span>Bitcoin</span> | BTC
-                                    </Link>
-                                </div>
-                            </td>
 
-                            <td className={styles.tdLabel} data-label="Valor mercado">
-                                1T
-                            </td>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Moeda</th>
+            <th scope="col">Valor mercado</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Volume</th>
+            <th scope="col">Variação 24h</th>
+          </tr>
+        </thead>
 
-                            <td className={styles.tdLabel} data-label="Preço">
-                                1T
-                            </td>
+        <tbody id="tbody">
 
-                            <td className={styles.tdLabel} data-label="Volume">
-                                1T
-                            </td>
+          <tr className={styles.tr}>
 
-                            <td className={styles.tdLabel} data-label="Variação 24h">
-                                1T
-                            </td>
-                        </tr>
-                    </tbody>
-                </thead>
-            </table>
-        </main>
-    )
+            <td className={styles.tdLabel} data-label="Moeda">
+              <div className={styles.name}>
+                <Link to={"/detail/bitcoin"}>
+                  <span>Bitcoin</span> | BTC
+                </Link>
+              </div>
+            </td>
+
+            <td className={styles.tdLabel} data-label="Valor mercado">
+              1T
+            </td>
+
+            <td className={styles.tdLabel} data-label="Preço">
+              8.000
+            </td>
+
+            <td className={styles.tdLabel} data-label="Volume">
+              2B
+            </td>
+
+            <td className={styles.tdProfit} data-label="Variação 24h">
+              <span>1.20</span>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+    </main>
+  )
 }
