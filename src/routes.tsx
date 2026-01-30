@@ -3,9 +3,11 @@ import { createBrowserRouter } from "react-router-dom";
 import { Home } from "./pages/home";
 import { Detail } from "./pages/details/details";
 import { NotFound } from "./pages/notfound/notfound";
+import { Layout } from "./components/layout";
 
 export const router = createBrowserRouter([
     {
+        element:<Layout/>,
         children:[
             {
                 path:"/",
