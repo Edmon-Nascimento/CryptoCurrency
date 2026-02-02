@@ -1,13 +1,29 @@
 import styles from './home.module.css'
 import { BsSearch } from  'react-icons/bs'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { SubmitEvent } from 'react'
+import { getData } from '../../services/api/api'
+import type { CoinProps } from '../../services/types/types'
 
 export function Home() {
 
+  const apiKey ='23d633f9b6aa4fe39d7860ef14e794243a2a3a3da015f8862052eb632ce81a1f'
+
   const [input, setInput] = useState("")
+  const [coins, setCoins] = useState<CoinProps[]>([])
   const navigate = useNavigate()
+
+  const price = Intl.NumberFormat("en-US",{style:"currency", currency:"USD"})
+
+  useEffect(()=>{
+    async function loadCoins() {
+      const result = await getData(100, 0, apiKey)
+      setCoins(result)
+    }
+
+    loadCoins()
+  },[])
 
   function handleSubmit(e:SubmitEvent){
     e.preventDefault()
