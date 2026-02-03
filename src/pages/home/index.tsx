@@ -15,6 +15,7 @@ export function Home() {
   const navigate = useNavigate()
 
   const price = Intl.NumberFormat("en-US",{style:"currency", currency:"USD"})
+  const priceCompact = Intl.NumberFormat("en-US",{style:"currency", currency:"USD", notation:"compact"})
 
   useEffect(()=>{
     async function loadCoins() {
@@ -64,33 +65,36 @@ export function Home() {
 
         <tbody id="tbody">
 
-          <tr className={styles.tr}>
+        {coins.length > 0 && coins.map((coin)=>(
+          <tr className={styles.tr} key={coin.id}>
 
             <td className={styles.tdLabel} data-label="Moeda">
               <div className={styles.name}>
-                <Link to={"/detail/bitcoin"}>
-                  <span>Bitcoin</span> | BTC
+                <img src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`} alt={`Logo ${coin.name}`} className={styles.logo} />
+                <Link to={`/detail/${coin.id}`}>
+                  <span>{coin.name}</span> | {coin.symbol}
                 </Link>
               </div>
             </td>
 
             <td className={styles.tdLabel} data-label="Valor mercado">
-              1T
+              {priceCompact.format(Number(coin.marketCapUsd))}
             </td>
 
             <td className={styles.tdLabel} data-label="Preço">
-              8.000
+              {price.format(Number(coin.priceUsd))}
             </td>
 
             <td className={styles.tdLabel} data-label="Volume">
-              2B
+              {priceCompact.format(Number(coin.volumeUsd24Hr))}
             </td>
 
-            <td className={styles.tdProfit} data-label="Variação 24h">
-              <span>1.20</span>
+            <td className={Number(coin.changePercent24Hr) > 0 ? styles.tdProfit : styles.tdLoss} data-label="Variação 24h">
+              <span>{Number(coin.changePercent24Hr).toFixed(2)}%</span>
             </td>
 
           </tr>
+        ))}
 
         </tbody>
       </table>
