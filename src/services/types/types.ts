@@ -3,8 +3,12 @@ export type DataProps = {
     data: CoinProps[]
 }
 
-export type CoinResponse{
+export type CoinResponse = {
   data:CoinProps
+}
+
+export type ErrorResponse = {
+  error:string
 }
 
 export type CoinProps = {

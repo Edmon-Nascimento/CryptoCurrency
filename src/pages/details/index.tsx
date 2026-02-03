@@ -1,30 +1,61 @@
+import styles from './details.module.css'
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { getCoinById } from "../../services/api/api"
-import type { CoinProps } from "../../services/types/types"
+import type { CoinProps, ErrorResponse } from "../../services/types/types"
 
 export function Detail(){
 
     const apiKey='23d633f9b6aa4fe39d7860ef14e794243a2a3a3da015f8862052eb632ce81a1f'
 
     const {cripto} = useParams()
-    const [coin, setCoin] = useState<CoinProps>()
+    const navigate = useNavigate()
+    const[loading, setLoading] = useState(true)
+    const [coin, setCoin] = useState<CoinProps | null>(null)
 
     const price = Intl.NumberFormat("en-US",{style:"currency", currency:"USD"})
     const priceCompact = Intl.NumberFormat("en-US",{style:"currency", currency:"USD", notation:"compact"})
 
     useEffect(()=>{
         async function loadCoin(){
-            const result = await getCoinById(cripto, apiKey)
+            const result: CoinProps|ErrorResponse = await getCoinById(cripto, apiKey)
+
+            if("error" in result){
+                navigate("/")
+                return
+            }
 
             setCoin(result)
+            setLoading(false)
+
         }
         loadCoin()
-    },[])
+    },[cripto, navigate])
+
+
+    if(loading || !coin){
+        return(
+        <div className={styles.container}>
+            <p className={styles.loading}>Carregando moedas...</p>
+        </div>
+        )
+    }
 
     return(
-        <div>
-            <h1>Detalhes {cripto}</h1>
+        <div className={styles.container}>
+            <h1>{coin?.name}</h1>
+            <h1>{coin?.symbol}</h1>
+
+            <section className={styles.content}>
+                <img src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`} alt={`Logo ${coin?.name}`} />
+
+                <p>{coin.name} | {coin.symbol}</p>
+                <p>Preço: {price.format(Number(coin.priceUsd))}</p>
+                <p>Valor de mercado: {priceCompact.format(Number(coin.marketCapUsd))}</p>
+                <p>Volume: {priceCompact.format(Number(coin.volumeUsd24Hr))}</p>
+                <p>Variação 24h: {Number(coin.changePercent24Hr).toFixed(2)}%</p>
+
+            </section>
 
         </div>
     )

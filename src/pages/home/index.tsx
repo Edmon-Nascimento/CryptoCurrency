@@ -14,6 +14,7 @@ export function Home() {
   const [coins, setCoins] = useState<CoinProps[]>([])
   const [offset, setOffset] = useState(0)
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(true)
 
   const price = Intl.NumberFormat("en-US",{style:"currency", currency:"USD"})
   const priceCompact = Intl.NumberFormat("en-US",{style:"currency", currency:"USD", notation:"compact"})
@@ -27,6 +28,7 @@ export function Home() {
     }
 
     loadCoins()
+    setLoading(false)
   },[offset])
 
   function handleSubmit(e:SubmitEvent){
@@ -44,6 +46,14 @@ export function Home() {
     }
 
     setOffset(offset+10)
+  }
+
+  if(loading){
+    return(
+      <div className={styles.container}>
+        <p className={styles.loading}>Carregando moedas...</p>
+      </div>
+    )
   }
 
   return (
