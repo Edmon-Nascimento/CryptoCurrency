@@ -1,169 +1,270 @@
-.container{
-  margin: 0 14px;
+:root {
+  --primary-bg: #0b1a2d;
+  --accent-gold: #d4af37;
+  --action-cyan: #00f2ff;
+  --text-main: #f0f4f8;
 }
 
-.form{
-  width: 100%;
+.container {
+  min-height: 100vh;
+  padding: 28px 18px;
+  color: var(--text-main);
   display: flex;
-  gap: 24px;
-}
-
-.form input{
-  width: 100%;
-  height: 44px;
-  border:0;
-  padding: 0 8px;
-  border-radius: 4px;
-  outline: none;
-}
-
-.form button{
-  background: transparent;
-}
-
-table{
-  border-collapse: separate;
-  border-spacing: 0 14px;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  table-layout: fixed;
-}
-
-table caption {
-  font-size: 16px;
-  margin: 0.5em 0 .75em;
-}
-
-th{
-  color: #FFF;
-}
-
-.tr{
-  background-color: #1d1c20;
-}
-
-td:first-child,
-th:first-child{
-  border-radius: 8px 0 0 8px;
-}
-
-td:last-child,
-th:last-child{
-  border-radius: 0 8px 8px 0;
-}
-
-table th,
-table td{
-  padding: 14px;
-  text-align: center;
-}
-
-.tdLabel{
-  font-weight: bold;
-  font-size: 18px;
-  color: #FFF;
-}
-
-.tdProfit{
-  color: #12f98a;
-  font-weight: bold;
-}
-
-.tdLoss{
-  color: #f91257;
-  font-weight: bold;
-}
-
-.btnMore{
-  margin: 20px auto 0;
-  display: block;
-  padding: 10px 18px;
-  background: linear-gradient(90deg, #12f98a 0%, #06b6d4 100%);
-  color: #0b0b0b;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-}
-
-.btnMore:hover{
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.30);
-  opacity: 0.98;
-}
-
-.btnMore:active{
-  transform: translateY(0);
-}
-
-.logo{
-  width: 30px;
-}
-
-.name{
-  display: flex;
-  gap: 8px;
+  flex-direction: column;
   align-items: center;
+  gap: 18px;
 }
 
-@media screen and (max-width: 600px){
+.loading {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  letter-spacing: 0.3px;
+}
 
-  .name img{
-    margin-left: 15px;
+.form {
+  width: 100%;
+  max-width: 760px;
+
+  display: flex;
+  gap: 10px;
+
+  padding: 12px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 242, 255, 0.15);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(8px);
+}
+
+.form input {
+  flex: 1;
+  height: 52px;
+  padding: 0 14px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(240, 244, 248, 0.12);
+  outline: none;
+
+  background: rgba(11, 26, 45, 0.55);
+  color: var(--text-main);
+
+  font-size: 1rem;
+}
+
+.form input::placeholder {
+  color: rgba(240, 244, 248, 0.55);
+}
+
+.form input:focus {
+  border-color: rgba(0, 242, 255, 0.55);
+  box-shadow: 0 0 0 4px rgba(0, 242, 255, 0.14);
+}
+
+.form button {
+  width: 56px;
+  height: 52px;
+
+  border-radius: 14px;
+  border: 1px solid rgba(0, 242, 255, 0.25);
+
+  background: rgba(0, 242, 255, 0.12);
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  transition: transform 0.15s ease, background 0.2s ease, border 0.2s ease;
+}
+
+.form button:hover {
+  transform: translateY(-1px);
+  background: rgba(0, 242, 255, 0.2);
+  border-color: rgba(0, 242, 255, 0.55);
+}
+
+table {
+  width: 100%;
+  max-width: 980px;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  overflow: hidden;
+  border-radius: 18px;
+
+  background: #0f233d;
+    
+  border: 1px solid rgba(240, 244, 248, 0.08);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(8px);
+}
+
+thead th {
+  text-align: left;
+  padding: 16px 14px;
+
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+
+  color: rgba(240, 244, 248, 0.78);
+
+  background: rgba(11, 26, 45, 0.55);
+  border-bottom: 1px solid rgba(0, 242, 255, 0.12);
+}
+
+tbody td {
+  padding: 14px;
+  border-bottom: 1px solid rgba(240, 244, 248, 0.06);
+
+  font-size: 0.95rem;
+  color: rgba(240, 244, 248, 0.92);
+}
+
+.tr {
+  transition: background 0.18s ease;
+}
+
+.tr:hover {
+  background: rgba(0, 242, 255, 0.06);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  background: rgba(11, 26, 45, 0.6);
+
+  filter: drop-shadow(0 0 14px rgba(0, 242, 255, 0.14));
+}
+
+.name a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.name a span {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.name a:hover {
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 242, 255, 0.55);
+}
+
+.tdProfit {
+  color: var(--action-cyan);
+  font-weight: 700;
+}
+
+.tdLoss {
+  color: rgba(255, 92, 92, 0.95);
+  font-weight: 700;
+}
+
+.btnMore {
+  width: 100%;
+  max-width: 980px;
+  height: 52px;
+
+  border-radius: 18px;
+  border: 1px solid rgba(0, 242, 255, 0.25);
+
+  background: rgba(0, 242, 255, 0.12);
+  color: var(--text-main);
+
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+
+  transition: transform 0.15s ease, background 0.2s ease, border 0.2s ease;
+}
+
+.btnMore:hover {
+  transform: translateY(-1px);
+  background: rgba(0, 242, 255, 0.2);
+  border-color: rgba(0, 242, 255, 0.55);
+}
+
+@media (max-width: 860px) {
+  table thead {
+    display: none;
   }
 
-  table thead{
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    position: absolute;
-    width: 1px;
-    padding: 0;
-  }
-
-  .tr{
-    border-bottom: 1px solid #DDD;
+  table,
+  tbody,
+  tr,
+  td {
     display: block;
-    margin-bottom: 14px;
-  }
-
-  table td{
-    border-bottom: 1px solid rgba(221, 221, 221, 0.170);
-    display: block;
-    text-align: right;
-    font-size: 14px;
-  }
-
-  table td::before{
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  table td:last-child{
-    border-bottom: 0;
-  }
-
-  td:first-child,
-  th:first-child{
-    border-radius: 0;
-  }
-
-  td:last-child,
-  th:last-child{
-    border-radius: 0;
-  }
-
-  .btnMore{
     width: 100%;
-    padding: 12px 16px;
-    margin-top: 12px;
   }
 
+  table {
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .tr {
+    padding: 12px;
+    border-bottom: 1px solid rgba(240, 244, 248, 0.08);
+  }
+
+  tbody td {
+    border-bottom: 0;
+    padding: 10px 10px;
+
+    background: rgba(11, 26, 45, 0.45);
+    border: 1px solid rgba(240, 244, 248, 0.06);
+    border-radius: 14px;
+
+    margin-bottom: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .tdLabel::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: rgba(240, 244, 248, 0.72);
+  }
+
+  .name {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .name a {
+    text-align: right;
+  }
+}
+
+@media (max-width: 420px) {
+  .form {
+    padding: 10px;
+  }
+
+  .form input {
+    font-size: 0.95rem;
+  }
+
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
 }

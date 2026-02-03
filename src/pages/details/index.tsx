@@ -32,31 +32,48 @@ export function Detail(){
         loadCoin()
     },[cripto, navigate])
 
-
     if(loading || !coin){
         return(
         <div className={styles.container}>
-            <p className={styles.loading}>Carregando moedas...</p>
+            <p className={styles.loading}>Carregando detalhes da moeda...</p>
         </div>
         )
     }
 
-    return(
-        <div className={styles.container}>
-            <h1>{coin?.name}</h1>
-            <h1>{coin?.symbol}</h1>
+return (
+  <div className={styles.container}>
+    <h1>{coin.name}</h1>
+    <h1>{coin.symbol}</h1>
 
-            <section className={styles.content}>
-                <img src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`} alt={`Logo ${coin?.name}`} />
+    <section className={styles.content}>
+      <img
+        src={`https://assets.coincap.io/assets/icons/${coin.symbol.toLowerCase()}@2x.png`}
+        alt={`Logo ${coin.name}`}
+      />
 
-                <p>{coin.name} | {coin.symbol}</p>
-                <p>Preço: {price.format(Number(coin.priceUsd))}</p>
-                <p>Valor de mercado: {priceCompact.format(Number(coin.marketCapUsd))}</p>
-                <p>Volume: {priceCompact.format(Number(coin.volumeUsd24Hr))}</p>
-                <p>Variação 24h: {Number(coin.changePercent24Hr).toFixed(2)}%</p>
+      <p data-label="Moeda:">
+        <strong>
+          {coin.name} | {coin.symbol}
+        </strong>
+      </p>
 
-            </section>
+      <p data-label="Preço:">
+        <strong>{price.format(Number(coin.priceUsd))}</strong>
+      </p>
 
-        </div>
-    )
+      <p data-label="Valor de mercado:">
+        <strong>{priceCompact.format(Number(coin.marketCapUsd))}</strong>
+      </p>
+
+      <p data-label="Volume:">
+        <strong>{priceCompact.format(Number(coin.volumeUsd24Hr))}</strong>
+      </p>
+
+      <p data-label="Variação 24h:" className={Number(coin.changePercent24Hr) > 0 ? styles.tdProfit : styles.tdLoss}>
+        {Number(coin.changePercent24Hr).toFixed(2)}%
+      </p>
+    </section>
+  </div>
+)
+
 }

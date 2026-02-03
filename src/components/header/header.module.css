@@ -3,5 +3,9 @@
     align-items: center;
     justify-content: center;
     height: 120px;
-    max-width: 1080px;
+    padding-top: 20px;
+}
+
+.container img{
+    overflow: hidden;
 }
