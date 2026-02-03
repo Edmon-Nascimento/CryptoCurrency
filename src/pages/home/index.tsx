@@ -12,6 +12,7 @@ export function Home() {
 
   const [input, setInput] = useState("")
   const [coins, setCoins] = useState<CoinProps[]>([])
+  const [offset, setOffset] = useState(0)
   const navigate = useNavigate()
 
   const price = Intl.NumberFormat("en-US",{style:"currency", currency:"USD"})
@@ -19,12 +20,14 @@ export function Home() {
 
   useEffect(()=>{
     async function loadCoins() {
-      const result = await getData(100, 0, apiKey)
-      setCoins(result)
+      const result = await getData(10, offset, apiKey)
+
+      const listCoins = [...coins, ...result]
+      setCoins(listCoins)
     }
 
     loadCoins()
-  },[])
+  },[offset])
 
   function handleSubmit(e:SubmitEvent){
     e.preventDefault()
@@ -35,7 +38,12 @@ export function Home() {
   }
 
   function handleGetMore(){
-    
+    if(offset === 0){
+      setOffset(10)
+      return
+    }
+
+    setOffset(offset+10)
   }
 
   return (

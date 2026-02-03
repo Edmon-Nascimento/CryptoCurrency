@@ -1,6 +1,10 @@
-export type DataProp = {
+export type DataProps = {
     timestamp: number
     data: CoinProps[]
+}
+
+export type CoinResponse{
+  data:CoinProps
 }
 
 export type CoinProps = {
@@ -17,3 +21,4 @@ export type CoinProps = {
   vwap24Hr: string
   explorer: string
 }
+
