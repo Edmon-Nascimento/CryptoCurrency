@@ -2,7 +2,7 @@ import styles from './details.module.css'
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getCoinById } from "../../services/api/api"
-import type { CoinProps, ErrorResponse } from "../../services/types/types"
+import type { CoinProps } from "../../services/types/types"
 
 export function Detail(){
 
@@ -18,27 +18,37 @@ export function Detail(){
 
     useEffect(()=>{
         async function loadCoin(){
-            const result: CoinProps|ErrorResponse = await getCoinById(cripto, apiKey)
 
-            if("error" in result){
-                navigate("/")
-                return
+            if(!cripto){
+              navigate("/")
+              return
             }
 
-            setCoin(result)
-            setLoading(false)
-
+            try{
+              setLoading(true)
+              const result = await getCoinById(cripto, apiKey)
+              setCoin(result)
+            } catch(err){
+              navigate("/")
+            }finally{
+              setLoading(false)
+            }
         }
         loadCoin()
     },[cripto, navigate])
 
-    if(loading || !coin){
+    if(loading){
         return(
         <div className={styles.container}>
             <p className={styles.loading}>Carregando detalhes da moeda...</p>
         </div>
         )
     }
+
+    if (!coin){
+      navigate("*")
+      return
+    };
 
 return (
   <div className={styles.container}>

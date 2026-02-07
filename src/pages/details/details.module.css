@@ -109,12 +109,12 @@
   background: rgba(0, 242, 255, 0.08);
 }
 
-.tdProfit strong {
+.tdProfit {
   color: var(--action-cyan);
   font-weight: 700;
 }
 
-.tdLoss strong {
+.tdLoss {
   color: rgba(255, 92, 92, 0.95);
   font-weight: 700;
 }

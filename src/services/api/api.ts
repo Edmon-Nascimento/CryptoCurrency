@@ -16,7 +16,7 @@ export async function getData(limit:number, offset:number, apiKey: string){
 
 }
 
-export async function getCoinById(id:string|undefined, apiKey:string){
+export async function getCoinById(id:string, apiKey:string){
     const {data} = await api.get<CoinResponse>(`/assets/${id}`,{
         params:{apiKey}
     })

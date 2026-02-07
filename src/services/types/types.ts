@@ -9,6 +9,7 @@ export type CoinResponse = {
 
 export type ErrorResponse = {
   error:string
+  timestamp: number
 }
 
 export type CoinProps = {
